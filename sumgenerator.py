@@ -52,13 +52,17 @@ def create_subtraction(length, n, take=True):
 		second = []
 		# Random number of <length> digits.
 		for i in range(length):
-			first.append(random.randint(0,9))
+			# if the first digit, it can be from 1 to 9
+			if i == 0:
+				first.append(random.randint(1,9))
+			else:
+				first.append(random.randint(0,9))
 		# Random number of <length> digits.
 		for x in range(len(first)):
 			dig = first[x]
 			# The first digit of second number is to remain less than the first digit of the first number, so that the result is not negative.
 			if x == 0:
-				second.append(random.randint(0,dig))
+				second.append(random.randint(0,dig-1))
 			# If take / carry is allowed, the second number is random.
 			elif take == 'take':
 				second.append(random.randint(0,9))
