@@ -90,7 +90,7 @@ def pretty_sum(digitTuples, arithmaticOperator, dttm, sumsInARow=5, writeAnswer=
 	else:
 		fout = open('math_que_'+dttm+'.html', 'w')
 	# Generic HTML and CSS starting.
-	fout.write('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8"/>\n<title>\nMath sum generator</title>\n<style>\ntable, td {  border: 2px solid black; padding: 10px; font-size: 20px;}\n td { text-align: right; }\n</style>\n</head>\n<body>\n<table>\n')
+	fout.write('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8"/>\n<title>\nMath sum generator</title>\n<style>\ntable, td {  border: 2px solid black; padding: 10px; font-size: 35px;}\n td { text-align: right; }\n</style>\n</head>\n<body>\n<table>\n')
 	# Initialize counter
 	counter = 0
 	# a and b are the numbers
@@ -103,7 +103,7 @@ def pretty_sum(digitTuples, arithmaticOperator, dttm, sumsInARow=5, writeAnswer=
 		summ = '<td>'
 		summ += '<br>' + a + '<br/>'
 		summ += arithmaticOperator + ' ' + b + '<br/>'
-		summ += '--------------' + '<br/>'
+		summ += '----------' + '<br/>'
 		# If answer is to be written, do sum actually and print.
 		if writeAnswer:
 			if arithmaticOperator == '+':
@@ -131,11 +131,11 @@ if __name__ == "__main__":
 	operation = sys.argv[1]
 	# how many digits in the number?
 	digits = int(sys.argv[2])
-	# Default sums to generate are 25.
+	# Default sums to generate are 20.
 	if len(sys.argv) > 3:
 		sumsToGenerate = int(sys.argv[3])
 	else:
-		sumsToGenerate = 25
+		sumsToGenerate = 20
 	# Default is to allow take / carry.
 	# If there is specific mention of 'notake', take / carry is not allowed.
 	if len(sys.argv) > 4:
