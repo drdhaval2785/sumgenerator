@@ -3,50 +3,74 @@ import sys
 from datetime import datetime
 
 def date_time():
+	"""Generate datetime in string."""
+
 	return datetime.now().strftime("%d%m%Y_%H%M%S")
 
-def num_to_digit(numList):
+def num_to_str(numList):
+	"""Generate string from list of numbers."""
+
 	result = ''
 	for num in numList:
 		result += str(num)
-	#result = str(int(result))
 	return result
 
 def create_sum(length, n, take='take'):
+	"""Generate <n> sums of digits <length>."""
+
 	result = []
+	# Generate n sums.
 	for j in range(n):
 		first = []
 		second = []
+		# Generate a random number of <length> digits.
 		for i in range(length):
 			first.append(random.randint(0,9))
+		# Generate a random number of <length> digits.
 		for dig in first:
+			# If take / carry is allowed, second number is purely random.
 			if take == 'take':
 				second.append(random.randint(0,9))
+			# If take / carry is not allowed, second number is restricted so that its addition does not cross 9.
 			else:
 				second.append(random.randint(0,9-dig))
-		dig1 = num_to_digit(first)
-		dig2 = num_to_digit(second)
+		# Convert from list of numbers to strings.
+		dig1 = num_to_str(first)
+		dig2 = num_to_str(second)
+		# Append to the result.
 		result.append((dig1, dig2))
+	# Return the result.
 	return result
 
 def create_subtraction(length, n, take=True):
-	result = []
+	"""Generate <n> subtraction of <length> digits."""
+
+	result = []	
+	# Generate n sums.
 	for j in range(n):
 		first = []
 		second = []
+		# Random number of <length> digits.
 		for i in range(length):
 			first.append(random.randint(0,9))
+		# Random number of <length> digits.
 		for x in range(len(first)):
 			dig = first[x]
+			# The first digit of second number is to remain less than the first digit of the first number, so that the result is not negative.
 			if x == 0:
 				second.append(random.randint(0,dig))
+			# If take / carry is allowed, the second number is random.
 			elif take == 'take':
 				second.append(random.randint(0,9))
+			# otherwise the second number is less than the first one.
 			else:
 				second.append(random.randint(0,dig))
-		dig1 = num_to_digit(first)
-		dig2 = num_to_digit(second)
+		# Generate digits from list of numbers.
+		dig1 = num_to_str(first)
+		dig2 = num_to_str(second)
+		# Append to the result.
 		result.append((dig1, dig2))
+	# Return result.
 	return result
 
 def pretty_sum(digitTuples, arithmaticOperator, dttm, sumsInARow=10, writeAnswer=False):
