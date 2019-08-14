@@ -77,6 +77,32 @@ def create_subtraction(length, n, take=True):
 	# Return result.
 	return result
 
+def create_multiplication(length, n):
+	"""Generate <n> multiplication of upto <length> digits."""
+
+	result = []	
+	# Generate n sums.
+	for j in range(n):
+		first = []
+		second = []
+		# Random number of <length> digits.
+		for i in range(length):
+			# if the first digit, it can be from 1 to 9
+			if i == 0:
+				first.append(random.randint(1,9))
+			else:
+				first.append(random.randint(0,9))
+		# Random number of <length> digits.
+		for x in range(length):
+			second.append(random.randint(0,9))
+		# Generate digits from list of numbers.
+		dig1 = num_to_str(first)
+		dig2 = num_to_str(second)
+		# Append to the result.
+		result.append((dig1, dig2))
+	# Return result.
+	return result
+
 def pretty_sum(digitTuples, arithmaticOperator, dttm, sumsInARow=5, writeAnswer=False):
 	"""Pretty print the sums in html.
 
@@ -110,9 +136,13 @@ def pretty_sum(digitTuples, arithmaticOperator, dttm, sumsInARow=5, writeAnswer=
 				summ += str(int(a) + int(b)) + '<br/>'
 			elif arithmaticOperator == '-':
 				summ += str(int(a) - int(b)) + '<br/>'
+			elif arithmaticOperator in ['x', 'X']:
+				summ += str(int(a) * int(b)) + '<br/>'
 		# Else leave a blank line.
 		else:
 			summ += '<br/>'
+		if arithmaticOperator in ['x', 'X']:
+			summ += '<br/>' * (len(b)-1)
 		# Close the td.
 		summ += '</td>'	
 		# Write summ to the file.
@@ -160,5 +190,12 @@ if __name__ == "__main__":
 		pretty_sum(digit_tuples, '-', dttm)
 		# Write with answers to HTML.
 		pretty_sum(digit_tuples, '-', dttm, writeAnswer=True)
-
+	# If multiplication,
+	elif operation in ['x', 'X', '*']:
+		# Create sums.
+		digit_tuples = create_multiplication(digits, sumsToGenerate)
+		# Write without answers to HTML.
+		pretty_sum(digit_tuples, 'X', dttm)
+		# Write with answers to HTML.
+		pretty_sum(digit_tuples, 'X', dttm, writeAnswer=True)
 
